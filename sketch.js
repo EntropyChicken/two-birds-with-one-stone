@@ -34,10 +34,9 @@ touchEnded = function() {
 
 keyPressed = function(){inp[keyCode]=true;};
 keyReleased = function(){inp[keyCode]=false;};
-
 function setup() {
-  let dims = getCanvasDims();
-  createCanvas(dims.w, dims.h);
+  // Use p5's built-in window variables for a perfect match
+  createCanvas(windowWidth, windowHeight);
   
   angleMode(DEGREES);
   smooth();
@@ -54,8 +53,7 @@ function setup() {
 }
 
 function windowResized() {
-  let dims = getCanvasDims();
-  resizeCanvas(dims.w, dims.h);
+  resizeCanvas(windowWidth, windowHeight);
   background(247, 173, 94);
 }
 
