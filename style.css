@@ -2,10 +2,14 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100dvh; /* Use dynamic viewport height for mobile */
-  background-color: #000000;
+  height: 100dvh; /* Dynamic height prevents mobile address bar bugs */
+  background-color: #000000; /* Black bars will show here */
+  
+  /* Flexbox to perfectly center your 1.5:1 canvas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  position: relative; /* Allows absolute positioning for the canvas */
   
   touch-action: none;
   -webkit-touch-callout: none;
@@ -15,8 +19,6 @@ html, body {
 
 canvas {
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* Let p5.js control the width/height dynamically; CSS just keeps it block-level */
   touch-action: none;
 }

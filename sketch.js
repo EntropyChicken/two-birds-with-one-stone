@@ -34,9 +34,10 @@ touchEnded = function() {
 
 keyPressed = function(){inp[keyCode]=true;};
 keyReleased = function(){inp[keyCode]=false;};
+
 function setup() {
-  // Use p5's built-in window variables for a perfect match
-  createCanvas(windowWidth, windowHeight);
+  let dims = getCanvasDims();
+  createCanvas(dims.w, dims.h);
   
   angleMode(DEGREES);
   smooth();
@@ -44,6 +45,7 @@ function setup() {
   strokeJoin(ROUND);
   textAlign(CENTER, CENTER);
   background(247, 173, 94);
+  
   spawnEnemy(1, 150, 0);
   spawnEnemy(1, 250, 0);
   enemies[0].diameter = 36;
@@ -53,7 +55,9 @@ function setup() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  let dims = getCanvasDims();
+  resizeCanvas(dims.w, dims.h);
+  // Re-draw background so it fills the resized canvas
   background(247, 173, 94);
 }
 

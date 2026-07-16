@@ -11,7 +11,18 @@ var angTo = function(base, aim, strength){
 };
 
 function getCanvasDims() {
-  let w = min(windowWidth, windowHeight * 1.5);
-  let h = w * 2 / 3;
-  return { w, h };
+  const targetRatio = 1.5; // Width / Height
+  let w = windowWidth;
+  let h = windowHeight;
+
+  // If the window is too wide, limit width based on height
+  if (w / h > targetRatio) {
+    w = h * targetRatio;
+  } 
+  // If the window is too tall, limit height based on width
+  else {
+    h = w / targetRatio;
+  }
+
+  return { w: w, h: h };
 }
