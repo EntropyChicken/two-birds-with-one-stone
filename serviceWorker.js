@@ -1,4 +1,4 @@
-const CACHE_NAME = "one-stone-cache-v2";
+const CACHE_NAME = "one-stone-cache-v3";
 const CACHE_FILES = [
     "./", 
     "./index.html",
@@ -6,6 +6,13 @@ const CACHE_FILES = [
     "./sketch.js",
     "./libraries/p5.min.js",
     "./libraries/p5.sound.min.js",
+    "./assets/site.webmanifest",
+    "./assets/apple-touch-icon.png",
+    "./assets/favicon.ico",
+    "./assets/favicon-16x16.png",
+    "./assets/favicon-32x32.png",
+    "./assets/android-chrome-192x192.png",
+    "./assets/android-chrome-512x512.png"
 ];
 
 self.addEventListener("install", (event) => {
