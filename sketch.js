@@ -503,6 +503,21 @@ var spawnCampaignWave = function(wnum){
 mousePressed = function(){if(clickStatus<0){clickStatus=1;}};
 mouseReleased = function(){clickStatus=-1;};
 
+touchStarted = function() {
+    // Set mouse coordinates to the first touch immediately so the drag calculations work
+    if (touches.length > 0) {
+        mouseX = touches[0].x;
+        mouseY = touches[0].y;
+    }
+    if (clickStatus < 0) { clickStatus = 1; }
+    return false; // Prevent default iOS zoom and scroll gestures
+};
+
+touchEnded = function() {
+    clickStatus = -1;
+    return false; // Prevent default behavior
+};
+
 keyPressed = function(){inp[keyCode]=true;};
 keyReleased = function(){inp[keyCode]=false;};
 
