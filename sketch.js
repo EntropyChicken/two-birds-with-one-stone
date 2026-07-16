@@ -506,28 +506,34 @@ mouseReleased = function(){clickStatus=-1;};
 keyPressed = function(){inp[keyCode]=true;};
 keyReleased = function(){inp[keyCode]=false;};
 
+function getCanvasDims() {
+  let w = min(windowWidth, windowHeight * 1.5);
+  let h = w * 2 / 3;
+  return { w, h };
+}
+
 function setup() {
-  createCanvas(2*600, 2*400);
+  let dims = getCanvasDims();
+  createCanvas(dims.w, dims.h);
   
   angleMode(DEGREES);
   smooth();
   frameRate(60);
   strokeJoin(ROUND);
-  textAlign(CENTER,CENTER);
-  // textFont(createFont("sans-serif"));
-  if(width===600&&height===400){
-      //println("For wider screen, try:\n\nwww.khanacademy.org/computer-programming/e/5138610234900480?width=1080&height=720&editor=no");
-  }
+  textAlign(CENTER, CENTER);
   background(247, 173, 94);
+  spawnEnemy(1, 150, 0);
+  spawnEnemy(1, 250, 0);
+  enemies[0].diameter = 36;
+  enemies[1].diameter = 64;
+  enemies[0].hp = 10;
+  enemies[1].hp = 10;
+}
 
-
-  // title enemies
-  spawnEnemy(1,150,0);
-  spawnEnemy(1,250,0);
-  enemies[0].diameter=36;
-  enemies[1].diameter=64;
-  enemies[0].hp=10;
-  enemies[1].hp=10;
+function windowResized() {
+  let dims = getCanvasDims();
+  resizeCanvas(dims.w, dims.h);
+  background(247, 173, 94);
 }
 
 
