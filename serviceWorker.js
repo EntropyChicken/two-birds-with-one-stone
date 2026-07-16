@@ -1,4 +1,4 @@
-const CACHE_NAME = "one-stone-cache-v1";
+const CACHE_NAME = "one-stone-cache-v2";
 const CACHE_FILES = [
     "./", 
     "./index.html",
