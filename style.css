@@ -2,10 +2,9 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100dvh; /* Dynamic height prevents mobile address bar bugs */
-  background-color: #000000; /* Black bars will show here */
+  height: 100dvh;
+  background-color: #000000; /* Black bars will show in empty space */
   
-  /* Flexbox to perfectly center your 1.5:1 canvas */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +18,10 @@ html, body {
 
 canvas {
   display: block;
-  /* Let p5.js control the width/height dynamically; CSS just keeps it block-level */
+  /* Crucial for iOS: prevents the browser from auto-stretching the canvas */
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important; 
+  
   touch-action: none;
 }

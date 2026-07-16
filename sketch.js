@@ -34,10 +34,17 @@ touchEnded = function() {
 
 keyPressed = function(){inp[keyCode]=true;};
 keyReleased = function(){inp[keyCode]=false;};
+let canvasElement;
 
 function setup() {
   let dims = getCanvasDims();
-  createCanvas(dims.w, dims.h);
+  
+  // Store the canvas reference
+  let canvas = createCanvas(dims.w, dims.h);
+  canvasElement = canvas.elt; 
+  
+  // Explicitly apply the correct CSS width/height directly to the element
+  applyStrictSizing(dims.w, dims.h);
   
   angleMode(DEGREES);
   smooth();
@@ -57,8 +64,33 @@ function setup() {
 function windowResized() {
   let dims = getCanvasDims();
   resizeCanvas(dims.w, dims.h);
-  // Re-draw background so it fills the resized canvas
+  
+  // Re-apply strict sizing on orientation change or resize
+  applyStrictSizing(dims.w, dims.h);
+  
   background(247, 173, 94);
+}
+
+// Helper function to force iOS Safari's style engine to match the JS math
+function applyStrictSizing(w, h) {
+  if (canvasElement) {
+    canvasElement.style.width = w + 'px';
+    canvasElement.style.height = h + 'px';
+  }
+}
+
+function getCanvasDims() {
+  const targetRatio = 1.5; // Width / Height
+  let w = windowWidth;
+  let h = windowHeight;
+
+  if (w / h > targetRatio) {
+    w = h * targetRatio;
+  } else {
+    h = w / targetRatio;
+  }
+
+  return { w: w, h: h };
 }
 
 function draw(){
