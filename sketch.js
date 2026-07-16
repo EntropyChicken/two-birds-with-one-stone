@@ -580,7 +580,7 @@ function draw(){
         noFill();
         strokeWeight(6);
         stroke(50);
-        ellipse(0,0,222,222);
+        ellipse(15,0,222,222);
         
         /*stroke(16, 114, 163);
         strokeWeight(3);
@@ -600,7 +600,7 @@ function draw(){
         
         
         // handle shooting interface
-        if(clickStatus===1&&dist(mx,my,-200,0)<=114){
+        if(clickStatus===1&&dist(mx,my,-185,0)<=114){
             // set anchor
             shootAnchor.placed=true;
             shootAnchor.x=mx;
