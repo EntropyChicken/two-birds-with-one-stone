@@ -15,20 +15,59 @@ var playAgain = function(){
     wave=0;
 };
 
-mousePressed = function(){if(clickStatus<0){clickStatus=1;}};
-mouseReleased = function(){clickStatus=-1;};
+mousePressed = function(){
+    // Only register a mouse press if we aren't already holding a click/touch
+    if(clickStatus < 0){
+        clickStatus = 1;
+    }
+};
+
+mouseReleased = function(){
+    clickStatus = -1;
+};
+
+// We will store the identifier of the touch that started the current action
+let activeTouchId = null;
 
 touchStarted = function() {
-    if (touches.length > 0) {
-        mouseX = touches[0].x;
-        mouseY = touches[0].y;
+    // If we are already tracking a touch, ignore any subsequent fingers
+    if (activeTouchId !== null) {
+        return false;
     }
-    if (clickStatus < 0) { clickStatus = 1; }
+
+    if (touches.length > 0) {
+        // Find the newly added touch (usually the last in the touches array, or touches[0])
+        let startingTouch = touches[touches.length - 1];
+        activeTouchId = startingTouch.id;
+        
+        mouseX = startingTouch.x;
+        mouseY = startingTouch.y;
+    }
+    
+    if (clickStatus < 0) { 
+        clickStatus = 1; 
+    }
     return false; 
 };
 
 touchEnded = function() {
-    clickStatus = -1;
+    // Check if the finger that was lifted is the active one tracking gameplay
+    let stillActive = false;
+    for (let i = 0; i < touches.length; i++) {
+        if (touches[i].id === activeTouchId) {
+            stillActive = true;
+            // Update coordinates with the correct ongoing finger's position
+            mouseX = touches[i].x;
+            mouseY = touches[i].y;
+            break;
+        }
+    }
+
+    // If the tracking finger was lifted, release the shot and clear the lock
+    if (!stillActive) {
+        clickStatus = -1;
+        activeTouchId = null;
+    }
     return false; 
 };
 
